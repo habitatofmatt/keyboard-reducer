@@ -11,6 +11,9 @@ def extract_keys(raw):
             continue
 
         for col_no, col in enumerate(line.split()):
+            if set(col) == set("-"):
+                continue
+
             key = f"{col_no},{line_no}"
 
             meta[key]["id"].append(len(id_))
