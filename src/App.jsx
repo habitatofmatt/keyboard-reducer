@@ -1,18 +1,28 @@
+import { useState } from "react";
+
 import { ContentSwitcher } from "./ContentSwitcher.jsx";
 
-function InputOriginal() {
-  return <textarea>original</textarea>;
-}
-
-function InputModified() {
-  return <textarea>modified</textarea>;
-}
-
-function InputLabels() {
-  return <textarea>labels</textarea>;
+function Input({ onChange, value }) {
+  return <textarea onChange={onChange} value={value}></textarea>;
 }
 
 export default function App() {
+  const [inputOriginal, setInputOriginal] = useState("original");
+  const [inputModified, setInputModified] = useState("modified");
+  const [inputLabels, setInputLabels] = useState("labels");
+
+  function onInputOriginalChange(e) {
+    setInputOriginal(e.target.value);
+  }
+
+  function onInputModifiedChange(e) {
+    setInputModified(e.target.value);
+  }
+
+  function onInputLabelsChange(e) {
+    setInputLabels(e.target.value);
+  }
+
   return (
     <>
       <h1>Keyboard Reducer</h1>
@@ -26,10 +36,15 @@ export default function App() {
         <a href="https://habitatofmatt.eu">Back to Habitat</a>
       </p>
       <ContentSwitcher>
-        <InputOriginal title="Original" />
-        <InputModified title="Modified" />
-        <InputLabels title="Labels" />
+        <Input onChange={onInputOriginalChange} title="Original" value={inputOriginal} />
+        <Input onChange={onInputModifiedChange} title="Modified" value={inputModified} />
+        <Input onChange={onInputLabelsChange} title="Labels" value={inputLabels} />
       </ContentSwitcher>
+      <ul>
+        <li>{inputOriginal}</li>
+        <li>{inputModified}</li>
+        <li>{inputLabels}</li>
+      </ul>
     </>
   );
 }
