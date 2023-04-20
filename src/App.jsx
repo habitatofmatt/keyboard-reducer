@@ -1,15 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { ContentSwitcher } from "./ContentSwitcher.jsx";
+
+import pythonScript from "./main.py?raw";
 
 function Input({ onChange, value }) {
   return <textarea onChange={onChange} value={value}></textarea>;
 }
 
 export default function App() {
+  const [pythonFunctions, setPythonFunctions] = useState(null);
+
   const [inputOriginal, setInputOriginal] = useState("original");
   const [inputModified, setInputModified] = useState("modified");
   const [inputLabels, setInputLabels] = useState("labels");
+
+  function setUpPython() {
+    loadPyodide().then((py) => {
+      py.runPython(pythonScript);
+      setPythonFunctions({ decorate: py.globals.get("decorate") });
+    });
+  }
 
   function onInputOriginalChange(e) {
     setInputOriginal(e.target.value);
@@ -22,6 +33,10 @@ export default function App() {
   function onInputLabelsChange(e) {
     setInputLabels(e.target.value);
   }
+
+  useEffect(() => {
+    setUpPython();
+  }, []);
 
   return (
     <>
@@ -40,11 +55,13 @@ export default function App() {
         <Input onChange={onInputModifiedChange} title="Modified" value={inputModified} />
         <Input onChange={onInputLabelsChange} title="Labels" value={inputLabels} />
       </ContentSwitcher>
-      <ul>
-        <li>{inputOriginal}</li>
-        <li>{inputModified}</li>
-        <li>{inputLabels}</li>
-      </ul>
+      {pythonFunctions && (
+        <ul>
+          <li>{pythonFunctions.decorate(inputOriginal)}</li>
+          <li>{pythonFunctions.decorate(inputModified)}</li>
+          <li>{pythonFunctions.decorate(inputLabels)}</li>
+        </ul>
+      )}
     </>
   );
 }
