@@ -1,0 +1,37 @@
+@font-face {
+  font-family: "Source Sans";
+  src: url("SourceSans3VF-Upright.ttf.woff2");
+}
+
+@font-face {
+  font-family: "Source Sans";
+  font-style: italic;
+  src: url("SourceSans3VF-Italic.ttf.woff2");
+}
+
+body {
+  background-color: #efe;
+  color: #000;
+  font-family: "Source Sans", sans-serif;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+a {
+  color: #000;
+}
+
+h1 {
+  font-weight: normal;
+}
+
+strong {
+  font-weight: 600;
+}
+
+textarea {
+  box-sizing: border-box;
+  font-family: "Source Sans", sans-serif;
+  height: 10rem;
+  width: 100%;
+}
