@@ -2,7 +2,25 @@ import json
 from collections import defaultdict
 
 
+def _iter_layers_from_raw(raw):
+    current = []
+
+    for line_no, line in enumerate(raw.splitlines()):
+        if line := line.strip():
+            current.append(line.split())
+        else:
+            if current:
+                yield current
+                current = []
+
+    if current:
+        yield current
+
+
 def extract_keys(raw):
+    layers = _iter_layers_from_raw(raw)
+    return json.dumps(list(layers))
+
     id_ = []
     meta = defaultdict(lambda: {"id": []})
 
@@ -14,7 +32,7 @@ def extract_keys(raw):
             if set(col) == set("-"):
                 continue
 
-            key = f"{col_no},{line_no}"
+            key = str((col_no, line_no))
 
             meta[key]["id"].append(len(id_))
             id_.append(col)
