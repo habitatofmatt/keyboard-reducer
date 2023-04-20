@@ -18,7 +18,10 @@ export default function App() {
   function setUpPython() {
     loadPyodide().then((py) => {
       py.runPython(pythonScript);
-      setPythonFunctions({ extractLabels: py.globals.get("extract_labels") });
+      setPythonFunctions({
+        extractKeys: py.globals.get("extract_keys"),
+        extractLabels: py.globals.get("extract_labels"),
+      });
     });
   }
 
@@ -55,9 +58,11 @@ export default function App() {
         <Input onChange={onInputModifiedChange} title="Modified" value={inputModified} />
         <Input onChange={onInputLabelsChange} title="Labels" value={inputLabels} />
       </ContentSwitcher>
-        <ul>
-          <li>{pythonFunctions && pythonFunctions.extractLabels(inputLabels)}</li>
-        </ul>
+      <ul>
+        <li>{pythonFunctions && pythonFunctions.extractKeys(inputOriginal)}</li>
+        <li>{pythonFunctions && pythonFunctions.extractKeys(inputModified)}</li>
+        <li>{pythonFunctions && pythonFunctions.extractLabels(inputLabels)}</li>
+      </ul>
     </>
   );
 }

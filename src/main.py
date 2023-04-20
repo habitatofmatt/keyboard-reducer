@@ -1,4 +1,22 @@
 import json
+from collections import defaultdict
+
+
+def extract_keys(raw):
+    id_ = []
+    meta = defaultdict(lambda: {"id": []})
+
+    for line_no, line in enumerate(raw.splitlines()):
+        if not (line := line.strip()):
+            continue
+
+        for col_no, col in enumerate(line.split()):
+            key = f"{col_no},{line_no}"
+
+            meta[key]["id"].append(len(id_))
+            id_.append(col)
+
+    return json.dumps({"id": id_, "meta": meta})
 
 
 def extract_labels(raw):
