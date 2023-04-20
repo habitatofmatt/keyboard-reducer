@@ -25,6 +25,18 @@ h1 {
   font-weight: normal;
 }
 
+strong {
+  font-weight: 600;
+}
+
+textarea {
+  box-sizing: border-box;
+  font-family: "Source Sans", sans-serif;
+  height: 10rem;
+  white-space: pre;
+  width: 100%;
+}
+
 /* Customizations */
 
 body {
