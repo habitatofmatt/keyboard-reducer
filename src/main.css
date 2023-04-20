@@ -33,7 +33,6 @@ textarea {
   box-sizing: border-box;
   font-family: "Source Sans", sans-serif;
   height: 10rem;
-  white-space: pre;
   width: 100%;
 }
 
@@ -41,4 +40,16 @@ textarea {
 
 body {
   text-align: center;
+}
+
+textarea {
+  white-space: pre;
+}
+
+.content-switcher nav a {
+  margin: 0.25rem;
+}
+
+.hidden {
+  display: none;
 }
