@@ -1,8 +1,11 @@
 import json
 from collections import defaultdict
+from itertools import zip_longest
 
 
 def _iter_layers_from_raw(raw):
+    """Convert raw data into layer -> row -> col nested arrays"""
+
     current = []
 
     for line_no, line in enumerate(raw.splitlines()):
@@ -17,27 +20,32 @@ def _iter_layers_from_raw(raw):
         yield current
 
 
+def _iter_layers_transposed(layers):
+    """Convert layer -> row -> col into row -> col -> layer"""
+
+    for row_set in zip_longest(*layers, fillvalue=[]):
+        yield zip_longest(*row_set, fillvalue="-")
+
+
 def extract_keys(raw):
     layers = _iter_layers_from_raw(raw)
-    return json.dumps(list(layers))
+    layers_transposed = _iter_layers_transposed(layers)
 
-    id_ = []
-    meta = defaultdict(lambda: {"id": []})
+    values = []
+    meta = defaultdict(lambda: {"v": []})
 
-    for line_no, line in enumerate(raw.splitlines()):
-        if not (line := line.strip()):
-            continue
+    for y, row in enumerate(layers_transposed):
+        for x, col in enumerate(row):
+            key = f"{x},{y}"
 
-        for col_no, col in enumerate(line.split()):
-            if set(col) == set("-"):
-                continue
+            for id_ in col:
+                if set(id_) == set("-"):
+                    meta[key]["v"].append(None)
+                else:
+                    meta[key]["v"].append(len(values))
+                    values.append(id_)
 
-            key = str((col_no, line_no))
-
-            meta[key]["id"].append(len(id_))
-            id_.append(col)
-
-    return json.dumps({"id": id_, "meta": meta})
+    return json.dumps({"values": values, "meta": meta})
 
 
 def extract_labels(raw):
