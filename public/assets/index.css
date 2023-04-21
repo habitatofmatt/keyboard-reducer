@@ -12,7 +12,7 @@
 body {
   background-color: #efe;
   color: #000;
-  font-family: "Source Sans", sans-serif;
+  font: 1rem "Source Sans", sans-serif;
   margin: 0 auto;
   padding: 1rem;
 }
@@ -31,7 +31,7 @@ strong {
 
 textarea {
   box-sizing: border-box;
-  font-family: "Source Sans", sans-serif;
+  font: 1rem "Source Sans", sans-serif;
   height: 10rem;
   width: 100%;
 }

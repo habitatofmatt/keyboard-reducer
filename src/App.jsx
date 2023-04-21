@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { ContentSwitcher } from "./components/ContentSwitcher.jsx";
+import { Keyboard } from "./components/Keyboard.jsx";
 import { TextArea } from "./components/TextArea.jsx";
 
 import pythonScript from "./main.py?raw";
@@ -22,9 +23,9 @@ export default function App() {
   const [inputModified, setInputModified] = useState("modified");
   const [inputLabels, setInputLabels] = useState("labels");
 
-  const [outputOriginal, setOutputOriginal] = useState({});
-  const [outputModified, setOutputModified] = useState({});
-  const [outputLabels, setOutputLabels] = useState({});
+  const [outputOriginal, setOutputOriginal] = useState(null);
+  const [outputModified, setOutputModified] = useState(null);
+  const [outputLabels, setOutputLabels] = useState(null);
 
   function setUpPython() {
     loadPyodide().then((py) => {
@@ -91,6 +92,8 @@ export default function App() {
         <TextArea onChange={updateInputModified} title="Modified" value={inputModified} />
         <TextArea onChange={updateInputLabels} title="Labels" value={inputLabels} />
       </ContentSwitcher>
+      {outputOriginal && <Keyboard data={outputOriginal} />}
+      {outputModified && <Keyboard data={outputModified} />}
       <ul>
         <li>{JSON.stringify(outputOriginal)}</li>
         <li>{JSON.stringify(outputModified)}</li>

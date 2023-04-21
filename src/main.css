@@ -1,4 +1,5 @@
 body {
+  max-width: 1024px;
   text-align: center;
 }
 
@@ -12,4 +13,15 @@ textarea {
 
 .hidden {
   display: none;
+}
+
+.key {
+  border: 1px solid #000;
+  display: flex;
+  flex-direction: column;
+}
+
+.keyboard {
+  display: grid;
+  gap: 0.5rem;
 }
