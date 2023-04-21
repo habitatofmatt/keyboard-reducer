@@ -75,7 +75,10 @@ def extract_keys(*, raw):
                 ids.update(key_data[2])
                 data.append(key_data)
 
-    return {"ids": list(ids), "data": data}
+    width = max((d[0] for d in data), default=-1) + 1
+    height = max((d[1] for d in data), default=-1) + 1
+
+    return {"ids": list(ids), "data": data, "width": width, "height": height}
 
 
 @bridge
