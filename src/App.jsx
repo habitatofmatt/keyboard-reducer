@@ -25,6 +25,10 @@ export default function App() {
   const [inputModified, setInputModified] = useState("modified");
   const [inputLabels, setInputLabels] = useState("labels");
 
+  const [outputOriginal, setOutputOriginal] = useState({});
+  const [outputModified, setOutputModified] = useState({});
+  const [outputLabels, setOutputLabels] = useState({});
+
   function setUpPython() {
     loadPyodide().then((py) => {
       py.runPython(pythonScript);
@@ -35,21 +39,43 @@ export default function App() {
     });
   }
 
-  function onInputOriginalChange(e) {
+  function updateInputOriginal(e) {
     setInputOriginal(e.target.value);
   }
 
-  function onInputModifiedChange(e) {
+  function updateInputModified(e) {
     setInputModified(e.target.value);
   }
 
-  function onInputLabelsChange(e) {
+  function updateInputLabels(e) {
     setInputLabels(e.target.value);
   }
 
-  useEffect(() => {
-    setUpPython();
-  }, []);
+  function updateOutputOriginal() {
+    if (pythonFunctions) setOutputOriginal(pythonFunctions.extractKeys({ raw: inputOriginal }));
+  }
+
+  function updateOutputModified() {
+    if (pythonFunctions) setOutputModified(pythonFunctions.extractKeys({ raw: inputModified }));
+  }
+
+  function updateOutputLabels() {
+    if (pythonFunctions) setOutputLabels(pythonFunctions.extractLabels({ raw: inputLabels }));
+  }
+
+  function updateOutput() {
+    updateOutputOriginal();
+    updateOutputModified();
+    updateOutputLabels();
+  }
+
+  useEffect(setUpPython, []);
+
+  useEffect(updateOutput, [pythonFunctions]);
+
+  useEffect(updateOutputOriginal, [inputOriginal]);
+  useEffect(updateOutputModified, [inputModified]);
+  useEffect(updateOutputLabels, [inputLabels]);
 
   return (
     <>
@@ -64,14 +90,14 @@ export default function App() {
         <a href="https://habitatofmatt.eu">Back to Habitat</a>
       </p>
       <ContentSwitcher>
-        <Input onChange={onInputOriginalChange} title="Original" value={inputOriginal} />
-        <Input onChange={onInputModifiedChange} title="Modified" value={inputModified} />
-        <Input onChange={onInputLabelsChange} title="Labels" value={inputLabels} />
+        <Input onChange={updateInputOriginal} title="Original" value={inputOriginal} />
+        <Input onChange={updateInputModified} title="Modified" value={inputModified} />
+        <Input onChange={updateInputLabels} title="Labels" value={inputLabels} />
       </ContentSwitcher>
       <ul>
-        <li>{pythonFunctions && JSON.stringify(pythonFunctions.extractKeys({ raw: inputOriginal }))}</li>
-        <li>{pythonFunctions && JSON.stringify(pythonFunctions.extractKeys({ raw: inputModified }))}</li>
-        <li>{pythonFunctions && JSON.stringify(pythonFunctions.extractLabels({ raw: inputLabels }))}</li>
+        <li>{JSON.stringify(outputOriginal)}</li>
+        <li>{JSON.stringify(outputModified)}</li>
+        <li>{JSON.stringify(outputLabels)}</li>
       </ul>
     </>
   );
