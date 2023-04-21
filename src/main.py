@@ -56,14 +56,16 @@ def extract_keys(raw):
     layers = _iter_layers_from_raw(raw)
     layers_transposed = _iter_layers_transposed(layers)
 
+    ids = set()
     data = []
 
     for y, row in enumerate(layers_transposed):
         for x, col in enumerate(row):
             if key_data := _get_key_data(x, y, col):
+                ids.update(key_data[2])
                 data.append(key_data)
 
-    return json.dumps(data)
+    return json.dumps({"ids": list(ids), "data": data})
 
 
 def extract_labels(raw):
