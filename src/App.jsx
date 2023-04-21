@@ -4,6 +4,16 @@ import { ContentSwitcher } from "./ContentSwitcher.jsx";
 
 import pythonScript from "./main.py?raw";
 
+function bridge(fn) {
+  function inner(input) {
+    const rawInput = JSON.stringify(input);
+    const rawOutput = fn(rawInput);
+    return JSON.parse(rawOutput);
+  }
+
+  return inner;
+}
+
 function Input({ onChange, value }) {
   return <textarea onChange={onChange} value={value}></textarea>;
 }
@@ -19,8 +29,8 @@ export default function App() {
     loadPyodide().then((py) => {
       py.runPython(pythonScript);
       setPythonFunctions({
-        extractKeys: py.globals.get("extract_keys"),
-        extractLabels: py.globals.get("extract_labels"),
+        extractKeys: bridge(py.globals.get("extract_keys")),
+        extractLabels: bridge(py.globals.get("extract_labels")),
       });
     });
   }
@@ -59,9 +69,9 @@ export default function App() {
         <Input onChange={onInputLabelsChange} title="Labels" value={inputLabels} />
       </ContentSwitcher>
       <ul>
-        <li>{pythonFunctions && pythonFunctions.extractKeys(inputOriginal)}</li>
-        <li>{pythonFunctions && pythonFunctions.extractKeys(inputModified)}</li>
-        <li>{pythonFunctions && pythonFunctions.extractLabels(inputLabels)}</li>
+        <li>{pythonFunctions && JSON.stringify(pythonFunctions.extractKeys({ raw: inputOriginal }))}</li>
+        <li>{pythonFunctions && JSON.stringify(pythonFunctions.extractKeys({ raw: inputModified }))}</li>
+        <li>{pythonFunctions && JSON.stringify(pythonFunctions.extractLabels({ raw: inputLabels }))}</li>
       </ul>
     </>
   );

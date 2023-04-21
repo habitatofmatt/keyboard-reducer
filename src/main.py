@@ -2,6 +2,15 @@ import json
 from itertools import zip_longest
 
 
+def bridge(fn):
+    def inner(raw_input):
+        input_ = json.loads(raw_input)
+        output = fn(**input_)
+        return json.dumps(output)
+
+    return inner
+
+
 def _iter_layers_from_raw(raw):
     """Convert raw data into layer -> row -> col nested arrays"""
 
@@ -52,7 +61,8 @@ def _get_key_data(x, y, raw):
     return output
 
 
-def extract_keys(raw):
+@bridge
+def extract_keys(*, raw):
     layers = _iter_layers_from_raw(raw)
     layers_transposed = _iter_layers_transposed(layers)
 
@@ -65,10 +75,11 @@ def extract_keys(raw):
                 ids.update(key_data[2])
                 data.append(key_data)
 
-    return json.dumps({"ids": list(ids), "data": data})
+    return {"ids": list(ids), "data": data}
 
 
-def extract_labels(raw):
+@bridge
+def extract_labels(*, raw):
     labels = {}
 
     for line in raw.splitlines():
@@ -82,4 +93,4 @@ def extract_labels(raw):
 
         labels[id_] = label
 
-    return json.dumps(labels)
+    return labels
