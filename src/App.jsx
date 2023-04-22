@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-import { ContentSwitcher } from "./components/ContentSwitcher.jsx";
 import { Keyboard } from "./components/Keyboard.jsx";
+import { Tabs } from "./components/Tabs.jsx";
 import { TextArea } from "./components/TextArea.jsx";
 
 import pythonScript from "./main.py?raw";
@@ -90,15 +90,15 @@ export default function App() {
         </p>
       </header>
       <main>
-        <ContentSwitcher>
+        <Tabs title="Input">
           <TextArea onChange={updateInputOriginal} title="Original" value={inputOriginal} />
           <TextArea onChange={updateInputModified} title="Modified" value={inputModified} />
           <TextArea onChange={updateInputLabels} title="Labels" value={inputLabels} />
-        </ContentSwitcher>
-        <ContentSwitcher>
+        </Tabs>
+        <Tabs title="Output">
           <Keyboard data={outputOriginal} title="Original" />
           <Keyboard data={outputModified} title="Modified" />
-        </ContentSwitcher>
+        </Tabs>
       </main>
       <ul>
         <li>{JSON.stringify(outputOriginal)}</li>

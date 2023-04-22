@@ -6,18 +6,6 @@ textarea {
   white-space: pre;
 }
 
-.content-switcher {
-  padding-bottom: 0.5rem;
-}
-
-.content-switcher nav a {
-  margin-right: 0.5rem;
-}
-
-.hidden {
-  display: none;
-}
-
 .key {
   border: 1px solid #ddd;
   display: flex;
@@ -36,4 +24,12 @@ textarea {
   gap: 0.25rem;
   overflow-x: auto;
   overflow-y: hidden;
+}
+
+.tabs {
+  padding-bottom: 0.5rem;
+}
+
+.tabs .tab.inactive {
+  display: none;
 }
