@@ -19,12 +19,21 @@ textarea {
 }
 
 .key {
-  border: 1px solid #000;
+  border: 1px solid #ddd;
   display: flex;
   flex-direction: column;
 }
 
+.keyboard-wrapper {
+  background-color: #fff;
+  border: 1px solid #777;
+  padding: 0.5rem;
+}
+
 .keyboard {
+  box-sizing: border-box;
   display: grid;
-  gap: 0.5rem;
+  gap: 0.25rem;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
