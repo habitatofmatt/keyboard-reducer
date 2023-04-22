@@ -1,14 +1,17 @@
 body {
   max-width: 1024px;
-  text-align: center;
 }
 
 textarea {
   white-space: pre;
 }
 
+.content-switcher {
+  padding-bottom: 0.5rem;
+}
+
 .content-switcher nav a {
-  margin: 0.25rem;
+  margin-right: 0.5rem;
 }
 
 .hidden {

@@ -7,6 +7,8 @@ function mapSize(value) {
 }
 
 export function Keyboard({ data }) {
+  if (!data) return null;
+
   return (
     <div
       className="keyboard"

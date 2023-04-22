@@ -77,23 +77,29 @@ export default function App() {
 
   return (
     <>
-      <h1>Keyboard Reducer</h1>
-      <p>
-        Describe original and modified layouts here and check if you're missing anything.
-        <br />
-        Powered by React and Pyodide.
-      </p>
-      <p>
-        <a href="https://github.com/habitatofmatt/keyboard-reducer">Source Code</a> &middot;{" "}
-        <a href="https://habitatofmatt.eu">Back to Habitat</a>
-      </p>
-      <ContentSwitcher>
-        <TextArea onChange={updateInputOriginal} title="Original" value={inputOriginal} />
-        <TextArea onChange={updateInputModified} title="Modified" value={inputModified} />
-        <TextArea onChange={updateInputLabels} title="Labels" value={inputLabels} />
-      </ContentSwitcher>
-      {outputOriginal && <Keyboard data={outputOriginal} />}
-      {outputModified && <Keyboard data={outputModified} />}
+      <header>
+        <h1>Keyboard Reducer</h1>
+        <p>
+          Describe original and modified layouts here and check if you're missing anything.
+          <br />
+          Powered by React and Pyodide.
+        </p>
+        <p>
+          <a href="https://github.com/habitatofmatt/keyboard-reducer">Source Code</a> &middot;{" "}
+          <a href="https://habitatofmatt.eu">Back to Habitat</a>
+        </p>
+      </header>
+      <main>
+        <ContentSwitcher>
+          <TextArea onChange={updateInputOriginal} title="Original" value={inputOriginal} />
+          <TextArea onChange={updateInputModified} title="Modified" value={inputModified} />
+          <TextArea onChange={updateInputLabels} title="Labels" value={inputLabels} />
+        </ContentSwitcher>
+        <ContentSwitcher>
+          <Keyboard data={outputOriginal} title="Original" />
+          <Keyboard data={outputModified} title="Modified" />
+        </ContentSwitcher>
+      </main>
       <ul>
         <li>{JSON.stringify(outputOriginal)}</li>
         <li>{JSON.stringify(outputModified)}</li>
