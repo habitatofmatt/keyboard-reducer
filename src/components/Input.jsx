@@ -1,3 +1,3 @@
-export function TextArea({ onChange, value }) {
+export function Input({ onChange, value }) {
   return <textarea onChange={onChange} value={value}></textarea>;
 }

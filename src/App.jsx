@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
+import { Input } from "./components/Input.jsx";
 import { Keyboard } from "./components/Keyboard.jsx";
 import { Tabs } from "./components/Tabs.jsx";
-import { TextArea } from "./components/TextArea.jsx";
 
 import pythonScript from "./main.py?raw";
 
@@ -91,9 +91,9 @@ export default function App() {
       </header>
       <main>
         <Tabs title="Input">
-          <TextArea onChange={updateInputOriginal} title="Original" value={inputOriginal} />
-          <TextArea onChange={updateInputModified} title="Modified" value={inputModified} />
-          <TextArea onChange={updateInputLabels} title="Labels" value={inputLabels} />
+          <Input onChange={updateInputOriginal} title="Original" value={inputOriginal} />
+          <Input onChange={updateInputModified} title="Modified" value={inputModified} />
+          <Input onChange={updateInputLabels} title="Labels" value={inputLabels} />
         </Tabs>
         <Tabs title="Output">
           <Keyboard data={outputOriginal} title="Original" />
