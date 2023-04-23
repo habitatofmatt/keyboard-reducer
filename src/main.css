@@ -16,6 +16,10 @@ textarea {
   line-height: 0.8rem;
 }
 
+.keyboard .key div {
+  white-space: nowrap;
+}
+
 .output {
   background-color: #fff;
   border: 1px solid #777;
