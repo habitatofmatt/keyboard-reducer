@@ -6,11 +6,11 @@ function mapSize(value) {
   return `${value * 2 + 1} / span 2`;
 }
 
-export function Keyboard({ data }) {
+export function Output({ data }) {
   if (!data) return null;
 
   return (
-    <div className="keyboard-wrapper">
+    <div className="output">
       <div
         className="keyboard"
         style={{

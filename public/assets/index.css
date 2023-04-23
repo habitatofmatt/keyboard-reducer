@@ -14,6 +14,7 @@ body {
   color: #000;
   font: 1rem "Source Sans", sans-serif;
   margin: 0 auto;
+  max-width: 56rem;
   padding: 1rem;
 }
 

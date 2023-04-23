@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { Input } from "./components/Input.jsx";
-import { Keyboard } from "./components/Keyboard.jsx";
+import { Output } from "./components/Output.jsx";
 import { Tabs } from "./components/Tabs.jsx";
 
 import pythonScript from "./main.py?raw";
@@ -80,10 +80,11 @@ export default function App() {
       <header>
         <h1>Keyboard Reducer</h1>
         <p>
-          Describe original and modified layouts here and check if you're missing anything.
-          <br />
-          Powered by React and Pyodide.
+          Describe original and modified layouts below and check if you're missing anything. This
+          utility can be useful when designing keyboard layouts for compact keyboards (65%, 50%, 40%
+          and so on).
         </p>
+        <p>Powered by React and Pyodide.</p>
         <p>
           <a href="https://github.com/habitatofmatt/keyboard-reducer">Source Code</a> &middot;{" "}
           <a href="https://habitatofmatt.eu">Back to Habitat</a>
@@ -96,8 +97,8 @@ export default function App() {
           <Input onChange={updateInputLabels} title="Labels" value={inputLabels} />
         </Tabs>
         <Tabs title="Output">
-          <Keyboard data={outputOriginal} title="Original" />
-          <Keyboard data={outputModified} title="Modified" />
+          <Output data={outputOriginal} title="Original" />
+          <Output data={outputModified} title="Modified" />
         </Tabs>
       </main>
       <ul>

@@ -1,29 +1,26 @@
-body {
-  max-width: 1024px;
-}
-
 textarea {
   white-space: pre;
 }
 
-.key {
-  border: 1px solid #ddd;
-  display: flex;
-  flex-direction: column;
-}
-
-.keyboard-wrapper {
-  background-color: #fff;
-  border: 1px solid #777;
-  padding: 0.5rem;
-}
-
 .keyboard {
-  box-sizing: border-box;
   display: grid;
   gap: 0.25rem;
-  overflow-x: auto;
-  overflow-y: hidden;
+}
+
+.keyboard .key {
+  align-items: center;
+  border: 1px solid #aaa;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 0.8rem;
+}
+
+.output {
+  background-color: #fff;
+  border: 1px solid #777;
+  overflow: auto hidden;
+  padding: 0.25rem;
 }
 
 .tabs {
