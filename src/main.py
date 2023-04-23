@@ -84,6 +84,11 @@ def extract_keys(*, raw):
 
 
 @bridge
+def extract_missing(*, this, other):
+    return sorted(set(other) - set(this))
+
+
+@bridge
 def extract_labels(*, raw):
     labels = {}
 

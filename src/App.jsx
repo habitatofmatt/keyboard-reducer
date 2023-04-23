@@ -27,11 +27,15 @@ export default function App() {
   const [outputModified, setOutputModified] = useState(null);
   const [outputLabels, setOutputLabels] = useState(null);
 
+  const [outputOriginalMissing, setOutputOriginalMissing] = useState([]);
+  const [outputModifiedMissing, setOutputModifiedMissing] = useState([]);
+
   function setUpPython() {
     loadPyodide().then((py) => {
       py.runPython(pythonScript);
       setPythonFunctions({
         extractKeys: bridge(py.globals.get("extract_keys")),
+        extractMissing: bridge(py.globals.get("extract_missing")),
         extractLabels: bridge(py.globals.get("extract_labels")),
       });
     });
@@ -61,6 +65,26 @@ export default function App() {
     if (pythonFunctions) setOutputLabels(pythonFunctions.extractLabels({ raw: inputLabels }));
   }
 
+  function updateOutputOriginalMissing() {
+    if (pythonFunctions)
+      setOutputOriginalMissing(
+        pythonFunctions.extractMissing({
+          this: outputOriginal.ids || [],
+          other: outputModified.ids || [],
+        })
+      );
+  }
+
+  function updateOutputModifiedMissing() {
+    if (pythonFunctions)
+      setOutputModifiedMissing(
+        pythonFunctions.extractMissing({
+          this: outputModified.ids || [],
+          other: outputOriginal.ids || [],
+        })
+      );
+  }
+
   function updateOutput() {
     updateOutputOriginal();
     updateOutputModified();
@@ -74,6 +98,9 @@ export default function App() {
   useEffect(updateOutputOriginal, [inputOriginal]);
   useEffect(updateOutputModified, [inputModified]);
   useEffect(updateOutputLabels, [inputLabels]);
+
+  useEffect(updateOutputOriginalMissing, [outputOriginal, outputModified]);
+  useEffect(updateOutputModifiedMissing, [outputOriginal, outputModified]);
 
   return (
     <>
@@ -103,7 +130,9 @@ export default function App() {
       </main>
       <ul>
         <li>{JSON.stringify(outputOriginal)}</li>
+        <li>{JSON.stringify(outputOriginalMissing)}</li>
         <li>{JSON.stringify(outputModified)}</li>
+        <li>{JSON.stringify(outputModifiedMissing)}</li>
         <li>{JSON.stringify(outputLabels)}</li>
       </ul>
     </>
