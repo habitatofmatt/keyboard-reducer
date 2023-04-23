@@ -97,8 +97,8 @@ export default function App() {
           <Input onChange={updateInputLabels} title="Labels" value={inputLabels} />
         </Tabs>
         <Tabs title="Output">
-          <Output data={outputOriginal} title="Original" />
-          <Output data={outputModified} title="Modified" />
+          <Output data={outputOriginal} labels={outputLabels} title="Original" />
+          <Output data={outputModified} labels={outputLabels} title="Modified" />
         </Tabs>
       </main>
       <ul>
