@@ -34,9 +34,9 @@ export default function App() {
     loadPyodide().then((py) => {
       py.runPython(pythonScript);
       setPythonFunctions({
-        extractKeys: bridge(py.globals.get("extract_keys")),
-        extractMissing: bridge(py.globals.get("extract_missing")),
         extractLabels: bridge(py.globals.get("extract_labels")),
+        extractLayout: bridge(py.globals.get("extract_layout")),
+        extractMissing: bridge(py.globals.get("extract_missing")),
       });
     });
   }
@@ -54,11 +54,11 @@ export default function App() {
   }
 
   function updateOutputOriginal() {
-    if (pythonFunctions) setOutputOriginal(pythonFunctions.extractKeys({ raw: inputOriginal }));
+    if (pythonFunctions) setOutputOriginal(pythonFunctions.extractLayout({ raw: inputOriginal }));
   }
 
   function updateOutputModified() {
-    if (pythonFunctions) setOutputModified(pythonFunctions.extractKeys({ raw: inputModified }));
+    if (pythonFunctions) setOutputModified(pythonFunctions.extractLayout({ raw: inputModified }));
   }
 
   function updateOutputLabels() {
@@ -124,8 +124,18 @@ export default function App() {
           <Input onChange={updateInputLabels} title="Labels" value={inputLabels} />
         </Tabs>
         <Tabs title="Output">
-          <Output data={outputOriginal} labels={outputLabels} title="Original" />
-          <Output data={outputModified} labels={outputLabels} title="Modified" />
+          <Output
+            labels={outputLabels}
+            layout={outputOriginal}
+            missing={outputOriginalMissing}
+            title="Original"
+          />
+          <Output
+            labels={outputLabels}
+            layout={outputModified}
+            missing={outputModifiedMissing}
+            title="Modified"
+          />
         </Tabs>
       </main>
       <ul>

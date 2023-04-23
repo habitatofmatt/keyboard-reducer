@@ -64,7 +64,7 @@ def _get_key_data(x, y, raw):
 
 
 @bridge
-def extract_keys(*, raw):
+def extract_layout(*, raw):
     layers = _iter_layers_from_raw(raw)
     layers_transposed = _iter_layers_transposed(layers)
 
