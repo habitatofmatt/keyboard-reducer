@@ -74,7 +74,7 @@ def extract_layout(*, raw):
     for y, row in enumerate(layers_transposed):
         for x, col in enumerate(row):
             if key_data := _get_key_data(x, y, col):
-                ids.update(key_data[2])
+                ids.update(id_ for id_ in key_data[2] if id_)
                 keys.append(key_data)
 
     width = max((key[0] for key in keys), default=-1) + 1
