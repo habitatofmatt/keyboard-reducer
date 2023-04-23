@@ -138,13 +138,6 @@ export default function App() {
           />
         </Tabs>
       </main>
-      <ul>
-        <li>{JSON.stringify(outputOriginal)}</li>
-        <li>{JSON.stringify(outputOriginalMissing)}</li>
-        <li>{JSON.stringify(outputModified)}</li>
-        <li>{JSON.stringify(outputModifiedMissing)}</li>
-        <li>{JSON.stringify(outputLabels)}</li>
-      </ul>
     </>
   );
 }
