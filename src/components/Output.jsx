@@ -18,10 +18,10 @@ export function Output({ data }) {
           gridTemplateRows: mapDimension(data.height),
         }}
       >
-        {data.data.map(([x, y, ids], idx) => (
+        {data.keys.map(([x, y, ids], idx) => (
           <div className="key" key={idx} style={{ gridColumn: mapSize(x), gridRow: mapSize(y) }}>
             {ids.map((id, idx) => (
-              <div key={idx}>{id}</div>
+              <div key={idx}>{id || <>&nbsp;</>}</div>
             ))}
           </div>
         ))}

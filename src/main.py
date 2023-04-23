@@ -67,18 +67,18 @@ def extract_keys(*, raw):
     layers_transposed = _iter_layers_transposed(layers)
 
     ids = set()
-    data = []
+    keys = []
 
     for y, row in enumerate(layers_transposed):
         for x, col in enumerate(row):
             if key_data := _get_key_data(x, y, col):
                 ids.update(key_data[2])
-                data.append(key_data)
+                keys.append(key_data)
 
-    width = max((d[0] for d in data), default=-1) + 1
-    height = max((d[1] for d in data), default=-1) + 1
+    width = max((key[0] for key in keys), default=-1) + 1
+    height = max((key[1] for key in keys), default=-1) + 1
 
-    return {"ids": list(ids), "data": data, "width": width, "height": height}
+    return {"ids": list(ids), "keys": keys, "width": width, "height": height}
 
 
 @bridge
