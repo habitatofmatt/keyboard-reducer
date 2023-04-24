@@ -4,6 +4,8 @@ import { Input } from "./components/Input.jsx";
 import { Output } from "./components/Output.jsx";
 import { Tabs } from "./components/Tabs.jsx";
 
+import { SAMPLE_LABELS, SAMPLE_MODIFIED, SAMPLE_ORIGINAL } from "./data.js";
+
 import pythonScript from "./main.py?raw";
 
 function bridge(fn) {
@@ -19,9 +21,9 @@ function bridge(fn) {
 export default function App() {
   const [pythonFunctions, setPythonFunctions] = useState(null);
 
-  const [inputOriginal, setInputOriginal] = useState("original");
-  const [inputModified, setInputModified] = useState("modified");
-  const [inputLabels, setInputLabels] = useState("labels");
+  const [inputOriginal, setInputOriginal] = useState(SAMPLE_ORIGINAL);
+  const [inputModified, setInputModified] = useState(SAMPLE_MODIFIED);
+  const [inputLabels, setInputLabels] = useState(SAMPLE_LABELS);
 
   const [outputOriginal, setOutputOriginal] = useState(null);
   const [outputModified, setOutputModified] = useState(null);
