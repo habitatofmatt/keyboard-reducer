@@ -115,8 +115,13 @@ export default function App() {
         </p>
         <p>Powered by React and Pyodide.</p>
         <p>
-          <a href="https://github.com/habitatofmatt/keyboard-reducer">Source Code</a> &middot;{" "}
-          <a href="https://habitatofmatt.eu">Back to Habitat</a>
+          <a href="https://github.com/habitatofmatt/keyboard-reducer" target="_blank">
+            Source Code
+          </a>
+          <> &middot; </>
+          <a href="https://habitatofmatt.eu" target="_blank">
+            Back to Habitat
+          </a>
         </p>
       </header>
       <main>
