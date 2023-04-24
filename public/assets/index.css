@@ -34,5 +34,6 @@ textarea {
   box-sizing: border-box;
   font: 1rem "Source Sans", sans-serif;
   height: 10rem;
+  resize: vertical;
   width: 100%;
 }
