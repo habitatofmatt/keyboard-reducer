@@ -1,0 +1,1 @@
+textarea{white-space:pre}.keyboard{display:grid;gap:.25rem}.keyboard .key{align-items:center;border:1px solid #aaa;display:flex;flex-direction:column;justify-content:center;line-height:.8rem}.keyboard .key div{white-space:nowrap}.output{background-color:#fff;border:1px solid #777;overflow:auto hidden;padding:.25rem}.tabs{padding-bottom:.5rem}.tabs .tab.inactive{display:none}
