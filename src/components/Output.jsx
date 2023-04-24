@@ -29,7 +29,7 @@ export function Output({ labels, layout, missing }) {
           </div>
         ))}
       </div>
-      Missing: {missing.join(", ")}
+      Missing: {missing.join(", ") || <i>none</i>}
     </div>
   );
 }
