@@ -24,7 +24,7 @@ export function Output({ labels, layout, missing }) {
           <div className="key" key={idx} style={{ gridColumn: mapSize(x), gridRow: mapSize(y) }}>
             {ids.map((id, idx) => {
               const label = id in labels ? labels[id] : id;
-              return <div key={idx}>{label == null ? <>&nbsp;</> : label}</div>;
+              return <div key={idx}>{label || <>&nbsp;</>}</div>;
             })}
           </div>
         ))}
