@@ -25,3 +25,4 @@ dist-ssr
 
 # Pyodide local CDN
 pyodide
+pyodide*.tar*
