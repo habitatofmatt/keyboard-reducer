@@ -73,7 +73,7 @@ export default function App() {
         pythonFunctions.extractMissing({
           this: outputOriginal.ids || [],
           other: outputModified.ids || [],
-        })
+        }),
       );
   }
 
@@ -83,7 +83,7 @@ export default function App() {
         pythonFunctions.extractMissing({
           this: outputModified.ids || [],
           other: outputOriginal.ids || [],
-        })
+        }),
       );
   }
 
